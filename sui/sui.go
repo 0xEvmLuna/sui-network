@@ -66,7 +66,6 @@ func (s *SuiNetwork) CreateWallet(amount int) {
 	wg.Wait()
 
 	for act := range ch {
-		fmt.Printf("[address]:%s [words]: %s", act.Address, act.Mnemonic)
 		s.Wallets = append(s.Wallets, act)
 	}
 
@@ -75,9 +74,6 @@ func (s *SuiNetwork) CreateWallet(amount int) {
 
 func (s *SuiNetwork) write() {
 	walletBytes, _ := json.Marshal(s.Wallets)
-	for _, v := range s.Wallets {
-		fmt.Printf("[Address]:%s [Mnemonic]: %s \n", v.Address, v.Mnemonic)
-	}
 	ioutil.WriteFile(
 		"SuiWallet.json",
 		walletBytes,
